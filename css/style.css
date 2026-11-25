@@ -1,0 +1,222 @@
+/* ==========================================================================
+   GULI DENT CLINIC - CLINICAL SANCTUARY DESIGN SYSTEM
+   Modern, Pure Medical Aesthetics CSS
+   ========================================================================== */
+
+:root {
+  /* Surface & Background */
+  --surface: #faf8ff;
+  --surface-dim: #d2d9f4;
+  --surface-bright: #faf8ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f3ff;
+  --surface-container: #eaedff;
+  --surface-container-high: #e2e7ff;
+  --surface-container-highest: #dae2fd;
+  --on-surface: #131b2e;
+  --on-surface-variant: #3d4947;
+  --inverse-surface: #283044;
+  --inverse-on-surface: #eef0ff;
+
+  /* Primary Brand (Teal & Clinical Mint) */
+  --primary: #00685f;
+  --on-primary: #ffffff;
+  --primary-container: #008378;
+  --on-primary-container: #f4fffc;
+  --primary-fixed: #89f5e7;
+  --primary-fixed-dim: #6bd8cb;
+  --on-primary-fixed: #00201d;
+  --on-primary-fixed-variant: #005049;
+  --inverse-primary: #6bd8cb;
+
+  /* Secondary & Tertiary */
+  --secondary: #585f66;
+  --on-secondary: #ffffff;
+  --secondary-container: #dce3eb;
+  --on-secondary-container: #5e656c;
+  --tertiary: #38645c;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #517d75;
+  --on-tertiary-container: #f4fffb;
+  --tertiary-fixed: #bdece2;
+  --tertiary-fixed-dim: #a2d0c6;
+
+  /* Utility & Outline */
+  --outline: #6d7a77;
+  --outline-variant: #bcc9c6;
+  --surface-tint: #006a61;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+
+  /* Typography */
+  --font-family-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Shadows & Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(188, 201, 198, 0.35);
+  --shadow-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 10px 30px -5px rgba(0, 104, 95, 0.08);
+  --shadow-hover: 0 20px 40px -10px rgba(0, 104, 95, 0.16);
+}
+
+/* ==========================================================================
+   Base & Resets
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-family-sans);
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-family-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-container-low);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* ==========================================================================
+   Glassmorphism & Interactive Cards
+   ========================================================================== */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+.hero-glow-aura {
+  background: radial-gradient(circle, rgba(137, 245, 231, 0.35) 0%, rgba(0, 104, 95, 0.12) 40%, transparent 75%);
+  filter: blur(50px);
+}
+
+/* Card Hover Interactions */
+.service-card, .doctor-card, .bento-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover, .doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+/* ==========================================================================
+   Slot & Booking Button States
+   ========================================================================== */
+.slot-btn {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slot-btn:active {
+  transform: scale(0.96);
+}
+
+.date-tab-btn {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   3D Viewport Styling
+   ========================================================================== */
+#tooth-3d-viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  cursor: grab;
+}
+
+#tooth-3d-viewport canvas:active {
+  cursor: grabbing;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* Toast Notification for Online Booking */
+.booking-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--surface-container-lowest);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 12px 32px rgba(19, 27, 46, 0.15);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(120%);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.booking-toast.show {
+  transform: translateY(0);
+}
+
+/* Mobile Navigation Drawer */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--outline-variant);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 40;
+}
+
+.mobile-nav-drawer.open {
+  max-height: 380px;
+}
