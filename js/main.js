@@ -366,18 +366,60 @@ function showToast(message, type = 'success') {
 }
 
 /* ==========================================================================
-   4. LANGUAGE SELECTOR SWITCHER
+   4. LANGUAGE SELECTOR SWITCHER (MINIMALIST)
    ========================================================================== */
 function initLanguageSwitcher() {
   const langButtons = document.querySelectorAll('.lang-btn');
+  if (!langButtons.length) return;
+
+  const setLanguage = (lang, showToastFeedback = true) => {
+    document.documentElement.lang = lang;
+    try {
+      localStorage.setItem('gulident_lang', lang);
+    } catch (e) {
+      /* ignore storage quota / sandbox restrictions */
+    }
+
+    // Synchronize all desktop and mobile language buttons
+    langButtons.forEach(btn => {
+      const btnLang = btn.getAttribute('data-lang');
+      if (btnLang === lang) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    if (showToastFeedback) {
+      const feedbackMessages = {
+        uz: 'Til o‘zgartirildi: O‘zbekcha',
+        ru: 'Язык изменен: Русский',
+        en: 'Language switched: English'
+      };
+      const message = feedbackMessages[lang] || `Til: ${lang.toUpperCase()}`;
+      showToast(message, 'success');
+    }
+  };
+
+  // Attach click listeners to all language buttons
   langButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      langButtons.forEach(b => {
-        b.className = 'lang-btn px-2.5 py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all';
-      });
-      btn.className = 'lang-btn px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-all shadow-sm';
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const selectedLang = btn.getAttribute('data-lang') || 'uz';
+      setLanguage(selectedLang, true);
     });
   });
+
+  // Restore saved language preference on page load
+  let savedLang = 'uz';
+  try {
+    savedLang = localStorage.getItem('gulident_lang') || 'uz';
+  } catch (e) {
+    savedLang = 'uz';
+  }
+  setLanguage(savedLang, false);
 }
 
 /* ==========================================================================

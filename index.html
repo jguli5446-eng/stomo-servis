@@ -118,12 +118,15 @@
       </nav>
 
       <!-- Right Action Items -->
-      <div class="flex items-center gap-3 sm:gap-4">
-        <!-- Language Switcher -->
-        <div class="flex items-center p-1 bg-surface-container-low rounded-full">
-          <button class="lang-btn px-2.5 py-1 rounded-full bg-primary text-on-primary text-xs font-semibold transition-all shadow-sm" type="button">UZ</button>
-          <button class="lang-btn px-2.5 py-1 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-semibold transition-all" type="button">RU</button>
-          <button class="lang-btn px-2.5 py-1 rounded-full text-on-surface-variant hover:text-on-surface text-xs font-semibold transition-all" type="button">EN</button>
+      <div class="flex items-center gap-3 sm:gap-5">
+        <!-- Minimalist Language Switcher -->
+        <div class="lang-switcher flex items-center text-xs tracking-wider select-none" role="group" aria-label="Tilni tanlash / Выбор языка / Select Language">
+          <span class="material-symbols-outlined text-[16px] text-outline/50 mr-1 hidden sm:inline-block pointer-events-none">language</span>
+          <button type="button" data-lang="uz" class="lang-btn active" title="O‘zbekcha" aria-label="O‘zbek tili">UZ</button>
+          <span class="lang-divider">/</span>
+          <button type="button" data-lang="ru" class="lang-btn" title="Русский" aria-label="Русский язык">RU</button>
+          <span class="lang-divider">/</span>
+          <button type="button" data-lang="en" class="lang-btn" title="English" aria-label="English">EN</button>
         </div>
 
         <!-- Appointment CTA -->
@@ -146,7 +149,23 @@
         <a href="#doctors" class="mobile-nav-link text-base font-semibold text-on-surface hover:text-primary transition-colors py-1">Shifokorlar</a>
         <a href="#about" class="mobile-nav-link text-base font-semibold text-on-surface hover:text-primary transition-colors py-1">Klinika haqida</a>
         <a href="#contact" class="mobile-nav-link text-base font-semibold text-on-surface hover:text-primary transition-colors py-1">Manzil va Aloqa</a>
-        <a href="#booking" class="mobile-nav-link w-full py-3 text-center rounded-xl bg-primary text-on-primary font-semibold shadow-md mt-2">
+        
+        <!-- Mobile Drawer Minimalist Language Selector -->
+        <div class="pt-3 pb-1 border-t border-outline-variant/30 flex items-center justify-between">
+          <span class="text-xs font-medium text-on-surface-variant flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-outline">language</span>
+            Tilni tanlang:
+          </span>
+          <div class="lang-switcher flex items-center text-xs tracking-wider select-none">
+            <button type="button" data-lang="uz" class="lang-btn active" title="O‘zbekcha">UZ</button>
+            <span class="lang-divider">/</span>
+            <button type="button" data-lang="ru" class="lang-btn" title="Русский">RU</button>
+            <span class="lang-divider">/</span>
+            <button type="button" data-lang="en" class="lang-btn" title="English">EN</button>
+          </div>
+        </div>
+
+        <a href="#booking" class="mobile-nav-link w-full py-3 text-center rounded-xl bg-primary text-on-primary font-semibold shadow-md mt-1">
           Qabulga Yozilish
         </a>
       </div>
